@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>상하이 3박 4일, 우리들의 여행</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #20231f;
+      --muted: #73776f;
+      --green: #52634d;
+      --cream: #f7f5ef;
+      --line: #e8e5dc;
+      --orange: #d9875b;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font-family: "Noto Sans KR", sans-serif;
+      line-height: 1.7;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    .topbar {
+      position: absolute; z-index: 2; top: 0; width: 100%;
+      padding: 22px 0; color: white;
+    }
+    .topbar .wrap { display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-weight: 800; letter-spacing: .04em; }
+    nav { display: flex; gap: 24px; font-size: 13px; }
+    nav a { text-decoration: none; opacity: .9; }
+    .hero {
+      min-height: 640px; display: grid; align-items: center; color: white;
+      background:
+        linear-gradient(90deg, rgba(20,25,24,.68), rgba(20,25,24,.08)),
+        url("https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=2000&q=85")
+        center 48% / cover;
+    }
+    .hero-copy { max-width: 700px; padding: 115px 0 70px; }
+    .eyebrow { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+    h1 { font-size: clamp(42px, 7vw, 76px); line-height: 1.17; margin: 18px 0; letter-spacing: -.05em; }
+    .hero p { max-width: 540px; color: rgba(255,255,255,.88); }
+    .button {
+      display: inline-block; padding: 12px 20px; margin: 12px 8px 0 0;
+      border-radius: 30px; background: white; color: var(--ink);
+      text-decoration: none; font-size: 13px; font-weight: 700;
+    }
+    .button.outline { color: white; background: transparent; border: 1px solid rgba(255,255,255,.7); }
+    .intro {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--line); border: 1px solid var(--line); margin-top: -36px;
+      position: relative; border-radius: 10px; overflow: hidden;
+    }
+    .intro div { background: white; padding: 22px; text-align: center; }
+    .intro strong { display: block; font-size: 18px; }
+    .intro span { color: var(--muted); font-size: 12px; }
+    section { padding: 88px 0; }
+    .section-label { color: var(--orange); font-size: 11px; letter-spacing: .18em; font-weight: 800; }
+    h2 { font-size: clamp(28px, 4vw, 42px); margin: 8px 0 12px; letter-spacing: -.04em; }
+    .lead { max-width: 680px; color: var(--muted); margin: 0 0 32px; }
+    .photo-grid { display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 14px; }
+    .photo {
+      min-height: 230px; padding: 18px; display: flex; align-items: end;
+      color: white; border-radius: 8px; background-size: cover; background-position: center;
+      text-decoration: none; overflow: hidden; position: relative;
+    }
+    .photo:before { content:""; position:absolute; inset:0; background:linear-gradient(transparent,rgba(0,0,0,.62)); }
+    .photo span { z-index: 1; font-weight: 700; }
+    .photo:first-child { min-height: 350px; grid-row: span 2; }
+    .photo:nth-child(2) { background-image:url("https://images.unsplash.com/photo-1545893835-abaa50cbe628?auto=format&fit=crop&w=1000&q=80"); }
+    .photo:nth-child(3) { background-image:url("https://images.unsplash.com/photo-1510001618818-4b4e3d86bf0c?auto=format&fit=crop&w=1000&q=80"); }
+    .photo:nth-child(4) { background-image:url("https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1000&q=80"); }
+    .photo:nth-child(5) { background-image:url("https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1000&q=80"); }
+    .photo:first-child { background-image:url("https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?auto=format&fit=crop&w=1200&q=85"); }
+    .video-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 22px;
+      padding: 28px; background: var(--cream); border-radius: 10px;
+    }
+    .video-card p { color: var(--muted); margin-bottom: 0; }
+    .video-card .button { background: var(--green); color: white; white-space: nowrap; }
+    .days { display: grid; gap: 16px; }
+    .day {
+      display: grid; grid-template-columns: 130px 1fr; gap: 22px;
+      padding: 25px; border: 1px solid var(--line); border-radius: 9px;
+    }
+    .day-number { color: var(--orange); font-size: 13px; font-weight: 800; }
+    .day h3 { margin: 2px 0 8px; font-size: 20px; }
+    .day p { margin: 4px 0; color: var(--muted); font-size: 14px; }
+    .tag { display: inline-block; margin: 3px 4px 3px 0; padding: 4px 10px; border-radius: 20px; background: var(--cream); font-size: 11px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { padding: 24px; border: 1px solid var(--line); border-radius: 9px; }
+    .card h3 { margin: 0 0 8px; font-size: 18px; }
+    .card p { color: var(--muted); font-size: 13px; }
+    .card a { color: var(--green); font-size: 13px; font-weight: 700; text-decoration: none; }
+    .transport { background: var(--cream); }
+    .route { display: grid; grid-template-columns: repeat(5, 1fr); align-items: start; gap: 12px; }
+    .stop { position: relative; padding-top: 20px; }
+    .stop:before { content:""; position:absolute; top:0; left:0; width:10px; height:10px; border-radius:50%; background:var(--orange); }
+    .stop:not(:last-child):after { content:""; position:absolute; left:14px; top:4px; width:calc(100% - 14px); height:1px; background:#d8d1c5; }
+    .stop b { display:block; font-size:14px; }
+    .stop small { color:var(--muted); }
+    .notice { margin-top: 22px; padding: 16px 18px; border-left: 3px solid var(--orange); background: white; color: var(--muted); font-size: 12px; }
+    footer { padding: 28px 0; background: #262a25; color: #d7d9d3; font-size: 12px; }
+    @media (max-width: 700px) {
+      nav { display:none; }
+      .hero { min-height: 570px; }
+      .intro { grid-template-columns: 1fr; margin-top: 0; }
+      .intro div { padding: 14px; }
+      section { padding: 62px 0; }
+      .photo-grid { grid-template-columns: 1fr 1fr; }
+      .photo:first-child { grid-column: span 2; grid-row: auto; min-height: 260px; }
+      .photo { min-height: 180px; }
+      .video-card { display:block; }
+      .day { grid-template-columns: 1fr; gap: 5px; padding: 20px; }
+      .cards { grid-template-columns: 1fr; }
+      .route { grid-template-columns: 1fr; gap: 16px; }
+      .stop { padding: 0 0 0 24px; }
+      .stop:before { top: 6px; }
+      .stop:not(:last-child):after { left: 4px; top: 16px; width: 1px; height: calc(100% + 8px); }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">SHANGHAI, WITH FRIENDS</div>
+      <nav>
+        <a href="#inspiration">여행 미리보기</a>
+        <a href="#itinerary">추천 일정</a>
+        <a href="#stay">숙소·맛집</a>
+        <a href="#transport">이동 안내</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wrap hero-copy">
+        <div class="eyebrow">3 nights · 4 days · girls' getaway</div>
+        <h1>도시의 설렘,<br>우리의 상하이</h1>
+        <p>30대 친구 셋이 함께하는 3박 4일. 오래된 골목의 감성부터 와이탄의 반짝이는 야경까지, 여유와 사진을 모두 챙기는 여행을 제안합니다.</p>
+        <a class="button" href="#itinerary">일정 둘러보기</a>
+        <a class="button outline" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=Shanghai+travel+4K+Bund+French+Concession">상하이 영상 보기 ↗</a>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="intro">
+        <div><strong>3박 4일</strong><span>도심 중심 여유로운 동선</span></div>
+        <div><strong>친구 3명</strong><span>카페·쇼핑·야경 취향 반영</span></div>
+        <div><strong>추천 숙박</strong><span>인민광장·난징동루 주변</span></div>
+      </div>
+    </div>
+
+    <section id="inspiration">
+      <div class="wrap">
+        <div class="section-label">CITY MOMENTS</div>
+        <h2>상하이의 장면들</h2>
+        <p class="lead">와이탄의 스카이라인, 예원의 전통 건축, 프랑스 조계지의 가로수길. 사진을 눌러 도시 분위기를 살펴보세요.</p>
+        <div class="photo-grid">
+          <a class="photo" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Shanghai+The+Bund+night"><span>와이탄 · 황푸강 야경</span></a>
+          <a class="photo" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Shanghai+Yu+Garden"><span>예원 · 전통 정원</span></a>
+          <a class="photo" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Shanghai+French+Concession"><span>프랑스 조계지</span></a>
+          <a class="photo" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Shanghai+Xintiandi"><span>신천지 · 저녁 산책</span></a>
+          <a class="photo" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Shanghai+Pudong+skyline"><span>푸둥 · 도시 전망</span></a>
+        </div>
+        <div class="video-card" style="margin-top:20px">
+          <div>
+            <strong>영상으로 먼저 떠나는 상하이</strong>
+            <p>와이탄 야경과 상하이 시내 여행 영상을 YouTube에서 확인해 보세요.</p>
+          </div>
+          <a class="button" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=Shanghai+travel+walk+Bund+2026">여행 영상 검색 ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="itinerary" style="background:#faf9f6">
+      <div class="wrap">
+        <div class="section-label">SUGGESTED ROUTE</div>
+        <h2>우리에게 맞춘 3박 4일</h2>
+        <p class="lead">도착·출국 시간을 고려해 짠 기본 일정입니다. 관광지를 빽빽하게 넣기보다 한 구역씩 여유 있게 즐겨요.</p>
+        <div class="days">
+          <article class="day">
+            <div class="day-number">DAY 01 · 도착</div>
+            <div><h3>체크인하고, 와이탄의 첫 야경</h3>
+              <p>상하이 공항 도착 → 호텔 이동 및 체크인 → 난징동루 산책 → 와이탄 야경 감상</p>
+              <span class="tag">가벼운 일정</span><span class="tag">황푸강 유람선 선택</span>
+            </div>
+          </article>
+          <article class="day">
+            <div class="day-number">DAY 02 · 전통과 감성</div>
+            <div><h3>예원의 골목에서 프랑스 조계지까지</h3>
+              <p>예원·예원상장 → 점심으로 샤오롱바오 → 신천지 카페 → 프랑스 조계지 산책과 저녁</p>
+              <span class="tag">골목 사진</span><span class="tag">카페</span><span class="tag">쇼핑</span>
+            </div>
+          </article>
+          <article class="day">
+            <div class="day-number">DAY 03 · 도시 전망</div>
+            <div><h3>취향대로 고르는 상하이 하루</h3>
+              <p>선택 A: 상하이타워·푸둥 전망대와 루자쭈이. 선택 B: 톈즈팡 골목 구경 후 징안사·쇼핑.</p>
+              <span class="tag">전망대는 사전 예매 확인</span><span class="tag">저녁은 예약 추천</span>
+            </div>
+          </article>
+          <article class="day">
+            <div class="day-number">DAY 04 · 귀국</div>
+            <div><h3>브런치와 마지막 기념품</h3>
+              <p>체크아웃 → 항공편 시간에 따라 인민광장·난징동루에서 쇼핑 → 공항으로 이동</p>
+              <span class="tag">공항 이동 여유 확보</span><span class="tag">항공사 터미널 사전 확인</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="stay">
+      <div class="wrap">
+        <div class="section-label">STAY & EAT</div>
+        <h2>숙소와 맛집, 이렇게 골라요</h2>
+        <p class="lead">관광과 식사를 편하게 하려면 인민광장·난징동루 주변을 우선 살펴보세요. 객실 수, 침대 구성, 후기와 취소 조건을 예약 전에 확인하세요.</p>
+        <div class="cards">
+          <article class="card">
+            <h3>페어몬트 피스 호텔</h3>
+            <p>와이탄 인근의 역사와 분위기를 중시하는 분들에게 어울리는 럭셔리 호텔 후보입니다. 객실 전망과 세 명 투숙 조건을 확인하세요.</p>
+            <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Fairmont+Peace+Hotel+Shanghai">지도·최근 후기 확인 ↗</a>
+          </article>
+          <article class="card">
+            <h3>상하이 메리어트 호텔 시티센터</h3>
+            <p>인민광장과 쇼핑 지역 접근성을 살펴볼 수 있는 호텔 후보입니다. 세 명이 편히 잘 수 있는 객실 타입과 조식을 비교해 보세요.</p>
+            <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Shanghai+Marriott+Hotel+City+Centre">지도·최근 후기 확인 ↗</a>
+          </article>
+          <article class="card">
+            <h3>남상만두 · 딩타이펑</h3>
+            <p>샤오롱바오와 딤섬으로 알려진 식당 후보입니다. 지점별 영업시간·대기·예약 가능 여부를 여행 당일 확인하세요.</p>
+            <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Nanxiang+Steamed+Bun+Restaurant+Shanghai">식당 위치·후기 확인 ↗</a>
+          </article>
+        </div>
+        <div class="notice">
+          맛집은 취향·지점·방문 시간에 따라 만족도가 달라 “보장”할 수 없습니다. 지도 앱의 최근 리뷰와 영업 상태를 확인하고, 인기 시간대는 예약 또는 대기 시간을 고려하세요. 알레르기·채식·맵기 등 요청 사항은 주문 전 전달하세요.
+        </div>
+      </div>
+    </section>
+
+    <section id="transport" class="transport">
+      <div class="wrap">
+        <div class="section-label">FROM HANAM TO SHANGHAI</div>
+        <h2>하남에서 상하이 호텔까지</h2>
+        <p class="lead">항공권을 예약한 뒤 도착 공항(PVG 푸둥 또는 SHA 홍차오), 터미널, 수하물과 이동 시간을 기준으로 교통편을 확정하세요.</p>
+        <div class="route">
+          <div class="stop"><b>경기 하남</b><small>공항버스·택시·대중교통 확인</small></div>
+          <div class="stop"><b>인천공항</b><small>항공사 카운터·터미널 확인</small></div>
+          <div class="stop"><b>직항 항공편</b><small>운항일·시간표·수하물 확인</small></div>
+          <div class="stop"><b>상하이 공항</b><small>PVG 또는 SHA 도착 확인</small></div>
+          <div class="stop"><b>호텔</b><small>지하철·택시·차량 호출 비교</small></div>
+        </div>
+        <div class="notice">
+          하남→인천공항은 출발 날짜에 운행하는 공항버스 노선과 예약 좌석을 공식 안내에서 확인하세요. 대중교통은 환승과 혼잡 시간을 넉넉히 잡고, 택시는 예상 요금과 승차 위치를 출발 전에 확인하세요.<br>
+          상하이 공항에서 호텔까지는 공항철도·지하철 또는 공식 승차 장소의 택시/차량 호출을 비교하세요. 중국의 결제 앱과 교통 이용 방식은 출국 전 최신 안내를 확인하고, 호텔 주소는 중국어로 저장해 두면 편리합니다.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">상하이 친구 여행 가이드 · 일정과 운영 정보는 항공편 및 방문 날짜에 맞춰 최신 내용을 확인해 주세요.</div>
+  </footer>
+</body>
+</html>
